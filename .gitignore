@@ -1,0 +1,27 @@
+# Node modules
+node_modules
+
+# Adonis directory for storing tmp files
+tmp
+
+# Environment variables, never commit this file
+.env
+.env.testing
+
+# The development sqlite file
+database/development.sqlite
+database/adonis.sqlite
+
+# Exclude lock files
+yarn.lock
+package-lock.json
+
+# Exclude newrelic events
+newrelic_agent.log
+
+## Remove coverage
+.nyc_output/
+coverage/
+
+database/*.sqlite
+.DS_Store
