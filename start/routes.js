@@ -19,3 +19,5 @@ Route.get('/', () => {
 });
 
 Route.post('/test', 'TestController.index').validator('Test');
+
+Route.resource('/stores', 'StoreController').apiOnly();

@@ -9,7 +9,8 @@
     "test": "nyc node ace test",
     "lint": "./node_modules/.bin/eslint ./**.js --fix",
     "build": "adonis migration:refresh && adonis seed && npm run test",
-    "cover": "npx nyc report --reporter=html && open coverage/index.html"
+    "cover": "npx nyc report --reporter=html && open coverage/index.html",
+    "debug": "adonis serve --dev --debug"
   },
   "author": "@frubana",
   "license": "",
@@ -28,8 +29,9 @@
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
     "@frubana/adonis-newrelic": "^0.0.5",
+    "mysql": "^2.18.1",
     "newrelic": "^5.11.0",
-    "pg": "^8.4.0"
+    "pg": "^8.4.1"
   },
   "devDependencies": {
     "eslint": "5.3.0",
