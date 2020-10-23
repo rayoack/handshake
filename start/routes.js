@@ -2,15 +2,14 @@
 
 const Route = use('Route');
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' };
-});
-
-Route.post('/test', 'TestController.index').validator('Test');
-
+// SigIn and Logout endpoints
 Route.post('/sessions', 'SessionController.create');
+Route.delete('/sessions/:id', 'SessionController.destroy').middleware('auth');
+
+// Register new user
 Route.post('/register', 'UserController.create');
 
+// User endpoints
 Route.resource('users', 'UserController')
   .apiOnly()
   .middleware('auth');
