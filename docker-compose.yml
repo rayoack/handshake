@@ -3,7 +3,7 @@ services:
   handshake:
     build: .
     ports:
-      - 3333:3333
+      - 8080:8080
     environment:
       DB_CONNECTION: ${DB_CONNECTION}
       DB_HOST: ${DB_HOST}

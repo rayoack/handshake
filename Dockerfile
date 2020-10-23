@@ -9,6 +9,6 @@ RUN npm install -g yarn @adonisjs/cli
 RUN yarn install
 RUN rm -rf /var/cache/apk/*
 
-EXPOSE 3333
+EXPOSE 8080
 
-CMD [ "adonis", "serve" ]
+CMD [ "adonis", "serve", "--dev" ]

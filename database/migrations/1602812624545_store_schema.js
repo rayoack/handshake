@@ -34,7 +34,6 @@ class StoreSchema extends Schema {
       table
       .integer('default_partners_percent');
       table.timestamps()
-      .notNullable();
     })
   }
 
