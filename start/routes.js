@@ -17,3 +17,11 @@ Route.resource('users', 'UserController')
 Route.resource('/stores', 'StoreController')
   .apiOnly()
   .middleware('auth');
+
+Route.post('/stores', 'StoreController.create')
+  .middleware('auth');
+
+Route.post('/products', 'ProductController.create');
+
+Route.resource('/products', 'ProductController').apiOnly();
+
