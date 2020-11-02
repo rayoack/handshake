@@ -7,34 +7,33 @@ class StoreSchema extends Schema {
   up () {
     this.create('stores', (table) => {
       table.increments()
+      
       table
       .string('name', 80)
-      .notNullable()
-      .unique();
+      .unique()
+      .notNullable();
       table
       .json('categories')
-      .notNullable();
+      .notNullable()
       table
-      .text('description');
+      .text('description')
+      table
+      .bigInteger('cep')
       table
       .text('adress')
-      .notNullable();
       table
       .string('city', 80)
-      .notNullable();
       table
       .string('state', 80)
-      .notNullable();
       table
       .string('country', 254)
-      .notNullable();
       table
       .boolean('allows_partners')
-      .notNullable();
+      .defaultTo(false)
       table
-      .integer('default_partners_percent');
+      .integer('default_partners_percent')
+      .notNullable() 
       table.timestamps()
-      .notNullable();
     })
   }
 

@@ -43,6 +43,13 @@ class User extends Model {
   static get hidden() {
     return ['password'];
   }
+
+  stores () {  
+    return this
+      .belongsToMany('App/Models/Store')
+      .pivotTable('store_users')
+      .withTimestamps()
+  }
 }
 
 module.exports = User;

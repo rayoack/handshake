@@ -20,4 +20,12 @@ Route.get('/', () => {
 
 Route.post('/test', 'TestController.index').validator('Test');
 
+
+Route.post('/stores', 'StoreController.create');
+
 Route.resource('/stores', 'StoreController').apiOnly();
+
+Route.post('/products', 'ProductController.create');
+
+Route.resource('/products', 'ProductController').apiOnly();
+
