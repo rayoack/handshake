@@ -11,6 +11,11 @@ class Store extends Model {
           .pivotTable('store_users')
           .withTimestamps()
       }
+
+    products()
+          {
+            return this.hasMany('App/Models/Product');
+          }
 }
 
 module.exports = Store
