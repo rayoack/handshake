@@ -27,6 +27,37 @@ class UploadService {
         };
     }
 
+    async uploadProductImages(request) {
+        const folder = 'uploads';
+        let i = 0;
+        let files = [];
+            
+        request.multipart.file('picture', {}, async file => {
+            let fileName = `${Date.now()}-${file.clientName.split(' ').join('-')}`;
+            
+            await Drive.put(`${folder}/${fileName}`, file.stream, {
+                ACL: 'public-read',
+                ContentType: `${file.type}/${file.subtype}`,
+            });
+            
+            let url = `https://handshake-img-store.s3.amazonaws.com/uploads/${fileName}`;
+
+            const newFile = {
+                product_image_index: i,
+                fileName,
+                url
+            };
+
+            files[i] = newFile;
+
+            i++
+        });
+        
+        await request.multipart.process();
+
+        return files;
+    }
+
     async deleteImage(image) {
         Logger.info('Deletando imagem:', image);
 

@@ -66,6 +66,31 @@ class ImageController {
         }
     }
 
+    async addProductImages({ request, response }) {
+
+        try {
+
+            const files = await uploadService.uploadProductImages(request);
+
+            for(let i = 0; i < files.length; i++) {
+                const data = {
+                    file_name: files[i].fileName,
+                    product_id: request.params.id,
+                    image_url: files[i].url,
+                    product_image_index: files[i].product_image_index
+                };
+                
+                await Image.create(data);
+            }
+            
+
+            response.status(200).send(files);
+            
+        } catch (error) {
+            response.status(404).send(error.message);
+        }
+    }
+
 };
 
 module.exports = ImageController;

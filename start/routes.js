@@ -24,8 +24,11 @@ Route.resource('stores', 'StoreController')
 
 // Products endpoints
 Route.post('/products', 'ProductController.create').middleware('auth');
-Route.resource('/products', 'ProductController').apiOnly();
+Route.resource('/products', 'ProductController')
+  .apiOnly()
+  .middleware('auth');
 
 // Image endpoints
-Route.post('/user/picture/:id/:type', 'ImageController.addUserImage').middleware('auth');
-Route.post('/store/picture/:id/:type', 'ImageController.addStoreImage').middleware('auth');
+Route.post('/picture/user/:id/:type', 'ImageController.addUserImage').middleware('auth');
+Route.post('/picture/store/:id/:type', 'ImageController.addStoreImage').middleware('auth');
+Route.post('/picture/products/:id', 'ImageController.addProductImages').middleware('auth');

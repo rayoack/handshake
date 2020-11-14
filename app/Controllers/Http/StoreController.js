@@ -6,11 +6,11 @@ const Logger = use('Logger');
 
 class StoreController {
   
-  // async index ({ request, response, view }) {
-  //   const stores = await Store.all();
+  async index ({ request, response, view }) {
+    const stores = await Store.all();
 
-  //   return stores;
-  // }
+    return stores;
+  }
 
   async create ({ request, response }) {
     try {

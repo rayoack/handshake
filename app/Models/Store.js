@@ -19,6 +19,10 @@ class Store extends Model {
     cover () {
         return this.hasOne('App/Models/Image', 'id', 'cover_store_id')
     }
+    
+    products () {
+        return this.hasMany('App/Models/Product');
+    }
 }
 
 module.exports = Store
