@@ -2,7 +2,7 @@
 
 const Route = use('Route');
 
-// SigIn and Logout endpoints
+// SignIn and Logout endpoints
 Route.post('/sessions', 'SessionController.create');
 Route.delete('/sessions/:id', 'SessionController.destroy').middleware('auth');
 
@@ -14,14 +14,18 @@ Route.resource('users', 'UserController')
   .apiOnly()
   .middleware('auth');
 
-Route.resource('/stores', 'StoreController')
-  .apiOnly()
-  .middleware('auth');
-
+// Store endpoints
 Route.post('/stores', 'StoreController.create')
   .middleware('auth');
 
-Route.post('/products', 'ProductController.create');
+Route.resource('stores', 'StoreController')
+  .apiOnly()
+  .middleware('auth');
 
+// Products endpoints
+Route.post('/products', 'ProductController.create').middleware('auth');
 Route.resource('/products', 'ProductController').apiOnly();
 
+// Image endpoints
+Route.post('/user/picture/:id/:type', 'ImageController.addUserImage').middleware('auth');
+Route.post('/store/picture/:id/:type', 'ImageController.addStoreImage').middleware('auth');

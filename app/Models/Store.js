@@ -10,7 +10,15 @@ class Store extends Model {
           .belongsToMany('App/Models/User')
           .pivotTable('store_users')
           .withTimestamps()
-      }
+    }
+      
+    logo () {
+        return this.hasOne('App/Models/Image', 'id', 'logo_store_id')
+    }
+
+    cover () {
+        return this.hasOne('App/Models/Image', 'id', 'cover_store_id')
+    }
 }
 
 module.exports = Store

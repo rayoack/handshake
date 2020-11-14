@@ -50,6 +50,14 @@ class User extends Model {
       .pivotTable('store_users')
       .withTimestamps()
   }
+
+  avatar () {
+    return this.hasOne('App/Models/Image', 'id', 'avatar_user_id')
+  }
+
+  cover () {
+    return this.hasOne('App/Models/Image', 'id', 'cover_user_id')
+  }
 }
 
 module.exports = User;

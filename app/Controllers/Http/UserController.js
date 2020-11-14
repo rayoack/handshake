@@ -37,6 +37,9 @@ class UserController {
             if(!user || user == undefined) return { error: "User not found." };
     
             delete user.password;
+
+            await user.load('avatar');
+            await user.load('cover');
     
             return user;
         } catch (error) {
