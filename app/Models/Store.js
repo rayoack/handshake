@@ -23,6 +23,10 @@ class Store extends Model {
     products () {
         return this.hasMany('App/Models/Product');
     }
+    
+    storeSections () {
+        return this.hasMany('App/Models/StoreSection');
+    }
 }
 
 module.exports = Store

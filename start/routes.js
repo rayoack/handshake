@@ -22,6 +22,16 @@ Route.resource('stores', 'StoreController')
   .apiOnly()
   .middleware('auth');
 
+// Store sections endpoints
+Route.post('/stores/sections', 'StoreSectionController.create')
+  .middleware('auth');
+
+Route.put('/stores/sections/:id', 'StoreSectionController.updateName')
+  .middleware('auth');
+
+Route.put('/sections/organize', 'StoreSectionController.updateSectionIndex')
+  .middleware('auth');
+
 // Products endpoints
 Route.post('/products', 'ProductController.create').middleware('auth');
 Route.resource('/products', 'ProductController')
