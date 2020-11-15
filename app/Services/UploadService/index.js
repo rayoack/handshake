@@ -27,8 +27,9 @@ class UploadService {
         };
     }
 
-    async uploadProductImages(request) {
+    async uploadProductImages(request, currentProductIndex) {
         const folder = 'uploads';
+        let actualProdIndex = currentProductIndex;
         let i = 0;
         let files = [];
             
@@ -43,13 +44,14 @@ class UploadService {
             let url = `https://handshake-img-store.s3.amazonaws.com/uploads/${fileName}`;
 
             const newFile = {
-                product_image_index: i,
+                product_image_index: actualProdIndex,
                 fileName,
                 url
             };
 
             files[i] = newFile;
 
+            actualProdIndex++
             i++
         });
         

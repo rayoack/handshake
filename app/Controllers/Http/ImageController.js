@@ -1,9 +1,10 @@
 'use strict'
-
+const Database = use('Database');
 const Image = use('App/Models/Image');
 const uploadService = use('App/Services/UploadService');
 const userService = use('App/Services/UserService');
 const storeService = use('App/Services/StoreService');
+const productService = use('App/Services/ProductService');
 const Logger = use('Logger');
 
 class ImageController {
@@ -69,8 +70,12 @@ class ImageController {
     async addProductImages({ request, response }) {
 
         try {
+            const storeHasImage = await productService.checkProductHasImages(request.params.id);
 
-            const files = await uploadService.uploadProductImages(request);
+            const files = await uploadService.uploadProductImages(request, storeHasImage.length);
+
+            Logger.info('FILESS!!!!', files);
+            Logger.info('storeHasImage!!!!', storeHasImage);
 
             for(let i = 0; i < files.length; i++) {
                 const data = {
@@ -91,6 +96,38 @@ class ImageController {
         }
     }
 
+    async deleteProductsImages({ request, response }) {
+
+        try {
+            const imagesToDeleteData = await request.only(['idsToDelete', 'product_id']);
+            
+            // Deletando as imagens
+            const imagesToDelete = await Database
+                .from('images')
+                .whereIn('id', imagesToDeleteData.idsToDelete);
+                
+            for(let i = 0; i < imagesToDelete.length; i++) {
+                await uploadService.deleteImage(imagesToDelete[i]);
+            }
+             
+            // Organizando index das imagens não deletadas
+            const imagesNotDeleted = await Database
+                .from('images')
+                .where('product_id', imagesToDeleteData.product_id);
+    
+            for(let i = 0; i < imagesNotDeleted.length; i++) {
+                await Database
+                    .table('images')
+                    .where('id', imagesNotDeleted[i].id)
+                    .update('product_image_index', i)
+            }
+
+            response.status(200).send(imagesToDelete);
+            
+        } catch (error) {
+            response.status(404).send(error.message);
+        }
+    }
 };
 
 module.exports = ImageController;

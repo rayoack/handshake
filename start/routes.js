@@ -32,3 +32,4 @@ Route.resource('/products', 'ProductController')
 Route.post('/picture/user/:id/:type', 'ImageController.addUserImage').middleware('auth');
 Route.post('/picture/store/:id/:type', 'ImageController.addStoreImage').middleware('auth');
 Route.post('/picture/products/:id', 'ImageController.addProductImages').middleware('auth');
+Route.delete('/images/products', 'ImageController.deleteProductsImages').middleware('auth');
