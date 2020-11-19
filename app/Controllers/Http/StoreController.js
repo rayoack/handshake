@@ -2,6 +2,7 @@
 
 const Store = use("App/Models/Store");
 const StoreUser = use("App/Models/StoreUser");
+const Database = use('Database');
 const Logger = use('Logger');
 
 class StoreController {
@@ -53,6 +54,23 @@ class StoreController {
 
       response.status(200).send(store);
       
+    } catch (error) {
+      response.status(404).send(error.message);
+    }
+  }
+
+  async getTheLatestRegisteredStores ({ request, response }) {
+    try {
+
+      const stores = await Store
+        .query()
+        .with('logo')
+        .with('cover')
+        .orderBy('created_at','desc')
+        .limit(10)
+        .fetch();
+
+      response.status(200).send(stores);
     } catch (error) {
       response.status(404).send(error.message);
     }

@@ -18,6 +18,9 @@ Route.resource('users', 'UserController')
 Route.post('/stores', 'StoreController.create')
   .middleware('auth');
 
+Route.get('/stores/recents', 'StoreController.getTheLatestRegisteredStores')
+  // .middleware('auth');
+
 Route.resource('stores', 'StoreController')
   .apiOnly()
   .middleware('auth');
