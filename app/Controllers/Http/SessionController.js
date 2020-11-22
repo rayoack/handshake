@@ -16,10 +16,21 @@ class SessionController {
 
     try {
       const { email, password } = request.all();
+
+      const user = await User
+        .query()
+        .where('email', email)
+        .with('avatar')
+        .with('cover')
+        .fetch();
+
+      if (!user) {
+        return response.status(401).send({ error: 'User not found.' });
+      }
   
       const token = await auth.attempt(email, password);
-  
-      return token;
+
+      return { user, token };
 
     } catch (error) {
       response.status(404).send(error.message);
