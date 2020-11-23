@@ -7,6 +7,10 @@ class StoreSection extends Model {
     store () {  
         return this.belongsTo('App/Models/Store')
     }
+
+    storeSubSection () {  
+        return this.belongsTo('App/Models/StoreSubSection')
+    }
 }
 
 module.exports = StoreSection
