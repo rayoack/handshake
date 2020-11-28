@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "adonis migration:refresh && node server.js",
     "dev": "adonis serve --dev",
     "test": "nyc node ace test",
     "lint": "./node_modules/.bin/eslint ./**.js --fix",
-    "build": "adonis migration:refresh && adonis seed && npm run test",
+    "build": "adonis migration:refresh && npm run test",
     "cover": "npx nyc report --reporter=html && open coverage/index.html",
     "debug": "adonis serve --dev --debug"
   },
