@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "adonis migration:refresh && node server.js",
+    "start": "npm install -g yarn @adonisjs/cli && adonis migration:refresh && node server.js",
     "dev": "adonis serve --dev",
     "test": "nyc node ace test",
     "lint": "./node_modules/.bin/eslint ./**.js --fix",
